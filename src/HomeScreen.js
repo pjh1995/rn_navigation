@@ -11,16 +11,23 @@ import {StyleSheet, View, Text, Button} from 'react-native';
 
 class HomeScreen extends Component {
   render() {
-    const {userData} = this.props.route.params;
-    console.log(this.props.route);
-    console.log(userData);
+    const {route, navigation} = this.props;
+    const {userData} = route.params;
     return (
       <View style={styles.component}>
         <Text>HomeScreen Screen</Text>
         <Button
           title="go to UserScreen"
           onPress={() => {
-            this.props.navigation.navigate('User', userData);
+            navigation.navigate('User', userData);
+          }}
+        />
+        <Button
+          title="Change the title"
+          onPress={() => {
+            navigation.setOptions({
+              title: 'changed',
+            });
           }}
         />
       </View>
