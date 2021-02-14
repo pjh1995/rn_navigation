@@ -8,11 +8,12 @@
 
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, Image, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/HomeScreen';
 import UserScreen from './src/UserScreen';
+import Logo from './src/Logo';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,16 @@ const commonHeaderOptions = {
   },
 };
 
+const homeHeaderRight = () => (
+  <Button title="Info" onPress={() => alert('sdsd')} color="pink" />
+);
+
+const homeHeaderOptions = {
+  title: 'Home Screen',
+  headerTitle: <Logo />,
+  headerRight: homeHeaderRight,
+};
+
 const userHeaderOptions = {
   title: 'User Screen',
   headerStyle: {
@@ -43,6 +54,7 @@ const userHeaderOptions = {
     fontWeight: 'bold',
     color: 'purple',
   },
+  headerBackTitle: 'Back',
 };
 
 class App extends Component {
@@ -56,12 +68,12 @@ class App extends Component {
             name="Home"
             component={HomeScreen}
             initialParams={{userData}}
-            options={{title: 'Home Screen'}}
+            options={homeHeaderOptions}
           />
           <Stack.Screen
             name="User"
             component={UserScreen}
-            // options={userHeaderOptions}
+            options={userHeaderOptions}
           />
         </Stack.Navigator>
       </NavigationContainer>
