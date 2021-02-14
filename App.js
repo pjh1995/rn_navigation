@@ -21,6 +21,7 @@ import {
 // import UserScreen from './src/stackComponents/UserScreen';
 import HomeScreen from './src/drawerComponents/HomeScreen';
 import UserScreen from './src/drawerComponents/UserScreen';
+import SideDrawer from './src/SideDrawer';
 import Logo from './src/Logo';
 
 const Stack = createStackNavigator();
@@ -66,15 +67,15 @@ const userHeaderOptions = {
   headerBackTitle: 'Back',
 };
 
-CustomDrawerContent = (props) => {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem label="Help" onPress={() => alert('Help')} icon={Logo} />
-      <DrawerItem label="Info" onPress={() => alert('Info Info')} />
-    </DrawerContentScrollView>
-  );
-};
+// CustomDrawerContent = (props) => {
+//   return (
+//     <DrawerContentScrollView {...props}>
+//       <DrawerItemList {...props} />
+//       <DrawerItem label="Help" onPress={() => alert('Help')} icon={Logo} />
+//       <DrawerItem label="Info" onPress={() => alert('Info Info')} />
+//     </DrawerContentScrollView>
+//   );
+// };
 
 class App extends Component {
   render() {
@@ -92,7 +93,7 @@ class App extends Component {
             activeTintColor: 'red',
             activeBackgroundColor: 'skyblue',
           }}
-          drawerContent={(props) => <CustomDrawerContent {...props} />}>
+          drawerContent={(props) => <SideDrawer {...props} />}>
           <Drawer.Screen
             name="Home"
             component={HomeScreen}
