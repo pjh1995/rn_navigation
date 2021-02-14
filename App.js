@@ -11,11 +11,20 @@ import React, {Component} from 'react';
 import {StyleSheet, Image, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './src/HomeScreen';
-import UserScreen from './src/UserScreen';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
+// import HomeScreen from './src/stackComponents/HomeScreen';
+// import UserScreen from './src/stackComponents/UserScreen';
+import HomeScreen from './src/drawerComponents/HomeScreen';
+import UserScreen from './src/drawerComponents/UserScreen';
 import Logo from './src/Logo';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const userData = {
   userIdx: 100,
@@ -57,26 +66,60 @@ const userHeaderOptions = {
   headerBackTitle: 'Back',
 };
 
+CustomDrawerContent = (props) => {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Help" onPress={() => alert('Help')} icon={Logo} />
+      <DrawerItem label="Info" onPress={() => alert('Info Info')} />
+    </DrawerContentScrollView>
+  );
+};
+
 class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator
+        <Drawer.Navigator
           initialRouteName="Home"
-          screenOptions={commonHeaderOptions}>
-          <Stack.Screen
+          drawerType="front"
+          drawerPosition="right"
+          drawerStyle={{
+            backgroundColor: 'pink',
+            width: 200,
+          }}
+          drawerContentOptions={{
+            activeTintColor: 'red',
+            activeBackgroundColor: 'skyblue',
+          }}
+          drawerContent={(props) => <CustomDrawerContent {...props} />}>
+          <Drawer.Screen
             name="Home"
             component={HomeScreen}
-            initialParams={{userData}}
-            options={homeHeaderOptions}
+            options={{
+              drawerIcon: Logo,
+            }}
           />
-          <Stack.Screen
-            name="User"
-            component={UserScreen}
-            options={userHeaderOptions}
-          />
-        </Stack.Navigator>
+          <Drawer.Screen name="User" component={UserScreen} />
+        </Drawer.Navigator>
       </NavigationContainer>
+      // <NavigationContainer>
+      //   <Stack.Navigator
+      //     initialRouteName="Home"
+      //     screenOptions={commonHeaderOptions}>
+      //     <Stack.Screen
+      //       name="Home"
+      //       component={HomeScreen}
+      //       initialParams={{userData}}
+      //       options={homeHeaderOptions}
+      //     />
+      //     <Stack.Screen
+      //       name="User"
+      //       component={UserScreen}
+      //       options={userHeaderOptions}
+      //     />
+      //   </Stack.Navigator>
+      // </NavigationContainer>
     );
   }
 }

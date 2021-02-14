@@ -9,25 +9,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
-class HomeScreen extends Component {
+class UserScreen extends Component {
   render() {
-    const {route, navigation} = this.props;
-    const {userData} = route.params;
     return (
       <View style={styles.component}>
-        <Text>HomeScreen Screen</Text>
+        <Text>User Screen</Text>
         <Button
-          title="go to UserScreen"
+          title="go to HomeScreen"
           onPress={() => {
-            navigation.navigate('User', userData);
-          }}
-        />
-        <Button
-          title="Change the title"
-          onPress={() => {
-            navigation.setOptions({
-              title: 'changed',
-            });
+            this.props.navigation.navigate('Home');
           }}
         />
       </View>
@@ -43,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default UserScreen;
